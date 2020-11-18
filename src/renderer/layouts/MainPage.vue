@@ -15,8 +15,9 @@
 </template>
 
 <script>
-import {ipcRenderer, remote} from 'electron'
+const { remote } = require('electron');
 import { mapGetters, mapActions } from 'vuex';
+
 const app = remote.app
 const window = remote.getCurrentWindow()
 

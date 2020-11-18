@@ -26,8 +26,10 @@ function createWindow () {
     hasShadow: false,
     minHeight: 540,
     minWidth: 960,
-    // maximizable: true,
-    // minimizable: true,
+    webPreferences: {
+      nodeIntegration: true,
+      enableRemoteModule: true
+    }
   })
 
   mainWindow.webContents.closeDevTools()

@@ -42,7 +42,7 @@ export default {
 .main {
   width: 100%;
   margin-top: 12px;
-  height: calc(100% - 60px);
+  height: calc(100% - 61px);
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
