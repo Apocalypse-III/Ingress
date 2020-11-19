@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "tyrantgenesis <genesis489449701@gmail.com>",
   "description": "由 Electron + VUE 开发的 Windows 桌面工具箱 Ingress",
-  "license": null,
+  "license": "BSD-3-Clause",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder",
@@ -48,6 +48,13 @@
     },
     "linux": {
       "icon": "build/icons"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "license": "LICENSE"
     }
   },
   "dependencies": {

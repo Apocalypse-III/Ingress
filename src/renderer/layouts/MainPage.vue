@@ -3,7 +3,7 @@
     <el-header class="status-bar">
       <i class="el-icon-rank drag"></i>
       <div class="button-group">
-        <div class="button fullScreen" title="全屏" @click="fullScreen"><i class="el-icon-full-screen icon"></i></div>
+<!--        <div class="button fullScreen" title="全屏" @click="fullScreen"><i class="el-icon-full-screen icon"></i></div>-->
         <div class="button min" title="最小化" @click="min"><i class="el-icon-minus icon"></i></div>
 <!--        <div class="button max"><i class="far fa-window-maximize icon i-white"></i></div>-->
         <div class="button max" title="最大化" @click="max"><i class="el-icon-copy-document icon"></i></div>
@@ -25,31 +25,17 @@ export default {
   name: "MainPage",
   data() {
     return {
-      tabBarStyle: {
-        backgroundColor: '#42b983',
-        boxShadow: '#42b983 0 0 16px',
-      }
+
     }
   },
   computed: {
     ...mapGetters(['isMaximized', 'isFullScreen'])
   },
   mounted() {
-    this.initTabBarFormSetting()
+
   },
   methods: {
     ...mapActions(['setMaximized', 'setFullScreen']),
-    initTabBarFormSetting() {
-      this.$ingress.db.settings.createOrFind({
-        key: 'tabBarColor',
-        name: '边栏颜色',
-        value: '#42b983',
-        type: 'color'
-      }).then(res => {
-        this.tabBarStyle.backgroundColor = res.value
-        this.tabBarStyle.boxShadow = `${res.value} 0 0 16px`
-      })
-    },
     close() {
       window.close()
     },

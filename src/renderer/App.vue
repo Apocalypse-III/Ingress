@@ -5,20 +5,23 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
   export default {
     name: 'ingress',
     data() {
       return {
-        appStyle: {
-          backgroundColor: '#fff',
-          borderRadius: '16px'
-        }
+
       }
+    },
+    computed: {
+      ...mapGetters(['appStyle']),
     },
     mounted() {
       this.initInterfaceFormSetting()
     },
     methods: {
+      ...mapActions(['change_app_style']),
       initInterfaceFormSetting() {
         this.$ingress.db.settings.createOrFind({
           key: 'backgroundColor',
@@ -26,7 +29,7 @@
           value: '#fff',
           type: 'color'
         }).then(res => {
-          this.appStyle.backgroundColor = res.value
+          this.change_app_style({key: 'backgroundColor', value: res.value})
         })
         this.$ingress.db.settings.createOrFind({
           key: 'borderRadius',
@@ -34,7 +37,7 @@
           value: '16',
           type: 'int'
         }).then(res => {
-          this.appStyle.borderRadius = res.value !== 0 ? res.value + 'px' : '0'
+          this.change_app_style({key: 'borderRadius', value: res.value !== 0 ? res.value + 'px' : '0'})
         })
       },
     }
