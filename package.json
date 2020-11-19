@@ -49,6 +49,10 @@
     "linux": {
       "icon": "build/icons"
     },
+    "extraResources":  {
+      "from": "./plugins/",
+      "to": "plugins"
+    },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,

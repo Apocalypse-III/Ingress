@@ -29,13 +29,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['isMaximized', 'isFullScreen'])
+    ...mapGetters('Window', ['isMaximized', 'isFullScreen'])
   },
   mounted() {
 
   },
   methods: {
-    ...mapActions(['setMaximized', 'setFullScreen']),
+    ...mapActions('Window', ['setMaximized', 'setFullScreen']),
     close() {
       window.close()
     },

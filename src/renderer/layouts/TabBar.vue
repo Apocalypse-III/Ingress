@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: "TabBar",
@@ -30,17 +31,20 @@ export default {
     return {
       tabBarStyle: {
         backgroundColor: '#42b983',
-        boxShadow: '#42b983 0 0 16px',
+        boxShadow: '#42b983 0 0 12px',
       }
     }
   },
+  computed: {
+    ...mapGetters('AppStyle', [''])
+  },
   mounted() {
-    this.initTabBarFormSetting()
+    this.initTabBarFromSetting()
   },
   methods: {
-    initTabBarFormSetting() {
+    initTabBarFromSetting() {
       this.$ingress.db.settings.createOrFind({
-        key: 'tabBarColor',
+        key: 'style.tabBar.backgroundColor',
         name: '边栏颜色',
         value: '#42b983',
         type: 'color'

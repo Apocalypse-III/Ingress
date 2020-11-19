@@ -15,29 +15,29 @@ import { mapGetters, mapActions } from 'vuex'
       }
     },
     computed: {
-      ...mapGetters(['appStyle']),
+      ...mapGetters('AppStyle', ['appStyle']),
     },
     mounted() {
-      this.initInterfaceFormSetting()
+      this.initInterfaceFromSetting()
     },
     methods: {
-      ...mapActions(['change_app_style']),
-      initInterfaceFormSetting() {
+      ...mapActions('AppStyle', ['changeAppStyle']),
+      initInterfaceFromSetting() {
         this.$ingress.db.settings.createOrFind({
-          key: 'backgroundColor',
+          key: 'style.app.backgroundColor',
           name: '背景颜色',
           value: '#fff',
           type: 'color'
         }).then(res => {
-          this.change_app_style({key: 'backgroundColor', value: res.value})
+          this.changeAppStyle({key: 'backgroundColor', value: res.value})
         })
         this.$ingress.db.settings.createOrFind({
-          key: 'borderRadius',
+          key: 'style.app.borderRadius',
           name: '边框圆角',
-          value: '16',
+          value: 16,
           type: 'int'
         }).then(res => {
-          this.change_app_style({key: 'borderRadius', value: res.value !== 0 ? res.value + 'px' : '0'})
+          this.changeAppStyle({key: 'borderRadius', value: res.value !== 0 ? res.value + 'px' : '0'})
         })
       },
     }

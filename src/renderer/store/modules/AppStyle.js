@@ -5,7 +5,7 @@ const state = {
     },
     tabBar: {
         backgroundColor: '#42b983',
-        boxShadow: '#42b983 0 0 16px',
+        boxShadow: '#42b983 0 0 12px',
     },
 }
 
@@ -25,12 +25,13 @@ const getters = {
 }
 
 const actions = {
-    change_app_style ({ commit }, payload) {
+    changeAppStyle ({ commit }, payload) {
         commit('CHANGE_APP_STYLE', payload)
     },
 }
 
 export default {
+    namespaced: true,
     state,
     mutations,
     getters,

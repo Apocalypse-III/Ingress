@@ -38,13 +38,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['has_delete_hosts'])
+    ...mapGetters('Hosts', ['has_delete_hosts']),
   },
   created() {
     this.getHosts()
   },
   methods: {
-    ...mapActions(['saveOriginalHosts', 'hasDeleteHosts']),
+    ...mapActions('Hosts', ['saveOriginalHosts', 'hasDeleteHosts']),
     getHosts() {
       this.hosts = []
       let content = fs.readFileSync(HOSTS_PATH)
