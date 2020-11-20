@@ -51,6 +51,7 @@ export default {
 
     },
     max() {
+      console.log(window.isMaximized())
       if (this.isMaximized){
         this.setMaximized(false)
         window.unmaximize()

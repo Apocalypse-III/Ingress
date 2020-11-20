@@ -10,8 +10,8 @@ const state = {
 }
 
 const mutations = {
-    CHANGE_APP_STYLE (state, payload) {
-        state.app[payload.key] = payload.value
+    CHANGE_ALL_STYLE (state, payload) {
+        state[payload.space][payload.key] = payload.value
     },
 }
 
@@ -25,8 +25,8 @@ const getters = {
 }
 
 const actions = {
-    changeAppStyle ({ commit }, payload) {
-        commit('CHANGE_APP_STYLE', payload)
+    changeAllStyle ({ commit }, payload) {
+        commit('CHANGE_ALL_STYLE', payload)
     },
 }
 

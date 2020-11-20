@@ -1,16 +1,18 @@
 module.exports = {
     build: {
-        env: require('./prod.env'),
-        DisableF12: true
+        env: {
+            NODE_ENV: 'production',
+            BASE_API: 'http://127.0.0.1:25565'
+        }
     },
     dev: {
-        env: require('./dev.env'),
+        env: {
+            NODE_ENV: 'development',
+            BASE_API: 'http://127.0.0.1:25565'
+        },
         removeElectronJunk: true,
         chineseLog: false,
         port: 9080
     },
-    UseStartupChart: true,
-    IsUseSysTitle: true,
     DllFolder: '',
-    BuiltInServerPort: 25565
 }

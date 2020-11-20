@@ -29,30 +29,16 @@ export default {
   name: "TabBar",
   data() {
     return {
-      tabBarStyle: {
-        backgroundColor: '#42b983',
-        boxShadow: '#42b983 0 0 12px',
-      }
+
     }
   },
   computed: {
-    ...mapGetters('AppStyle', [''])
+    ...mapGetters('AppStyle', ['tabBarStyle'])
   },
   mounted() {
-    this.initTabBarFromSetting()
+
   },
   methods: {
-    initTabBarFromSetting() {
-      this.$ingress.db.settings.createOrFind({
-        key: 'style.tabBar.backgroundColor',
-        name: '边栏颜色',
-        value: '#42b983',
-        type: 'color'
-      }).then(res => {
-        this.tabBarStyle.backgroundColor = res.value
-        this.tabBarStyle.boxShadow = `${res.value} 0 0 16px`
-      })
-    },
     navToPage(name) {
       if (name !== this.$route.name) this.$router.push({name: name})
     },

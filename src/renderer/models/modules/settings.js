@@ -5,7 +5,7 @@ import { settings } from '@/db'
 * @property string key
 * @property string name
 * @property string value
-* @property string type ['string', 'int', 'boolean', 'color', 'slider', 'image', 'display']
+* @property string type ['string', 'int', 'boolean', 'color', 'pixel', 'slider', 'image', 'display']
 * */
 
 const create = insert => {
