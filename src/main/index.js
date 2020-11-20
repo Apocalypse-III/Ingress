@@ -28,11 +28,12 @@ function createWindow () {
     minWidth: 960,
     webPreferences: {
       nodeIntegration: true,
-      enableRemoteModule: true
+      enableRemoteModule: true,
+      webSecurity: false,
     }
   })
 
-  mainWindow.webContents.closeDevTools()
+  mainWindow.webContents.openDevTools()
 
   mainWindow.loadURL(winURL)
 

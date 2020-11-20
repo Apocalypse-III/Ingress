@@ -7,8 +7,6 @@ import App from './App'
 import router from './router'
 import store from './store'
 
-if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
-
 // 阻止vue启动生产消息
 Vue.config.productionTip = false
 
