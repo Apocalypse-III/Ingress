@@ -56,6 +56,8 @@ app.on('activate', () => {
   }
 })
 
+app.commandLine.appendSwitch('disable-features', 'OutOfBlinkCors')
+
 /**
  * Auto Updater
  *
