@@ -15,6 +15,11 @@
             <div class="item-title">编辑hosts</div>
             <div class="item-to"><i class="el-icon-arrow-right"></i></div>
           </div>
+          <div class="menu-item" @click="navToPage('obs')">
+            <div class="item-icon"></div>
+            <div class="item-title">开启OBS</div>
+            <div class="item-to"><i class="el-icon-arrow-right"></i></div>
+          </div>
         </div>
       </div>
     </el-aside>

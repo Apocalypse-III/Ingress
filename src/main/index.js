@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow } from 'electron'
 
 /**
  * Set `__static` path to static files in production
@@ -33,8 +33,6 @@ function createWindow () {
     }
   })
 
-  mainWindow.webContents.openDevTools()
-
   mainWindow.loadURL(winURL)
 
   mainWindow.on('closed', () => {
@@ -55,8 +53,6 @@ app.on('activate', () => {
     createWindow()
   }
 })
-
-app.commandLine.appendSwitch('disable-features', 'OutOfBlinkCors')
 
 /**
  * Auto Updater

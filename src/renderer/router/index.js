@@ -10,6 +10,7 @@ import TabBar from "@/layouts/TabBar";
 // Pages
 import Home from "@/pages/Home";
 import EditHosts from "@/pages/EditHosts";
+import Obs from "@/pages/Obs";
 
 Vue.use(Router)
 
@@ -33,9 +34,14 @@ export default new Router({
               component: Home
             },
             {
-              path: '/',
+              path: '/edit-hosts',
               name: 'edit-hosts',
               component: EditHosts
+            },
+            {
+              path: '/obs',
+              name: 'obs',
+              component: Obs
             },
           ]
         },

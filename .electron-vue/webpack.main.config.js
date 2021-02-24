@@ -5,11 +5,8 @@ process.env.BABEL_ENV = 'main'
 const path = require('path')
 const { dependencies } = require('../package.json')
 const webpack = require('webpack')
-const config = require('../config')
 
-function resolve(dir) {
-  return path.join(__dirname, '..', dir)
-}
+const MinifyPlugin = require("babel-minify-webpack-plugin")
 
 let mainConfig = {
   entry: {
@@ -20,31 +17,10 @@ let mainConfig = {
   ],
   module: {
     rules: [
-      // {
-      //   test: /\.(js)$/,
-      //   enforce: 'pre',
-      //   exclude: /node_modules/,
-      //   use: {
-      //     loader: 'eslint-loader',
-      //     options: {
-      //       formatter: require('eslint-friendly-formatter')
-      //     }
-      //   }
-      // },
-      // {
-      //   test: /\.js$/,
-      //   use: 'happypack/loader?id=MainHappyBabel',
-      //   exclude: /node_modules/
-      // },
       {
-        test: /\.ts$/,
-        use: ['thread-loader',{
-          loader: 'babel-loader',
-          options: {
-            cacheDirectory: true
-          }
-        }, 'ts-loader'],
-
+        test: /\.js$/,
+        use: 'babel-loader',
+        exclude: /node_modules/
       },
       {
         test: /\.node$/,
@@ -62,13 +38,10 @@ let mainConfig = {
     path: path.join(__dirname, '../dist/electron')
   },
   plugins: [
-    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
   ],
   resolve: {
-    alias: {
-      '@config': resolve('config'),
-    },
-    extensions: ['.tsx', '.ts', '.js', '.json', '.node']
+    extensions: ['.js', '.json', '.node']
   },
   target: 'electron-main'
 }
@@ -78,10 +51,9 @@ let mainConfig = {
  */
 if (process.env.NODE_ENV !== 'production') {
   mainConfig.plugins.push(
-      new webpack.DefinePlugin({
-        '__static': `"${path.join(__dirname, '../static').replace(/\\/g, '\\\\')}"`,
-        '__lib': `"${path.join(__dirname, `../${config.DllFolder}`).replace(/\\/g, '\\\\')}"`
-      })
+    new webpack.DefinePlugin({
+      '__static': `"${path.join(__dirname, '../static').replace(/\\/g, '\\\\')}"`
+    })
   )
 }
 
@@ -90,9 +62,10 @@ if (process.env.NODE_ENV !== 'production') {
  */
 if (process.env.NODE_ENV === 'production') {
   mainConfig.plugins.push(
-      new webpack.DefinePlugin({
-        'process.env.NODE_ENV': '"production"'
-      })
+    new MinifyPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
+    })
   )
 }
 

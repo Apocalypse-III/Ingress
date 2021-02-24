@@ -3,9 +3,9 @@ import fs from 'fs'
 import os from 'os'
 import axios from 'axios'
 
-import App from './App'
-import router from './router'
-import store from './store'
+import App from '@/App'
+import router from '@/router'
+import store from '@/store'
 
 // 阻止vue启动生产消息
 Vue.config.productionTip = false
