@@ -47,6 +47,12 @@ export default {
     ...mapActions('Hosts', ['saveOriginalHosts', 'hasDeleteHosts']),
     getHosts() {
       this.hosts = []
+      try {
+        fs.accessSync(HOSTS_PATH, fs.constants.R_OK);
+      } catch (e) {
+        this.$notify.error('没有读取权限')
+        return false
+      }
       let content = fs.readFileSync(HOSTS_PATH)
       let data = content.toString().split('\n').map(val => val.trim()).filter(val => val && val.indexOf("#") < 0)
 
@@ -68,7 +74,15 @@ export default {
       this.hosts.forEach(item => {
         content += `${item.ip}        ${item.host}\r\n`
       })
+      try {
+        fs.accessSync(HOSTS_PATH, fs.constants.W_OK);
+      } catch (e) {
+        this.$notify.error('没有写入权限')
+        return false
+      }
+
       fs.writeFileSync(HOSTS_PATH, content);
+
       this.newBtn = true
       if (! formDelete) this.$message.success('保存成功')
       this.getHosts()
