@@ -1,17 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-
-// Layouts
-import MainPage from "@/layouts/MainPage";
-import TabBar from "@/layouts/TabBar";
-
-
-// Pages
-import Home from "@/pages/Home";
-import EditHosts from "@/pages/EditHosts";
-import Obs from "@/pages/Obs";
-
 Vue.use(Router)
 
 export default new Router({
@@ -22,30 +11,40 @@ export default new Router({
     },
     {
       path: '/',
-      component: MainPage,
+      component: () => import('@/layouts/MainPage'),
       children: [
         {
           path: '/',
-          component: TabBar,
+          component: () => import('@/layouts/TabBar'),
           children: [
             {
               path: '/',
               name: 'home',
-              component: Home
+              component: () => import('@/pages/Home')
             },
             {
-              path: '/edit-hosts',
-              name: 'edit-hosts',
-              component: EditHosts
+              path: '/hosts',
+              name: 'hosts',
+              component: () => import('@/pages/Hosts/List')
             },
             {
               path: '/obs',
               name: 'obs',
-              component: Obs
+              component: () => import('@/pages/Obs')
             },
           ]
         },
-
+        {
+          path: '/',
+          component: () => import('@/layouts/DetailPage'),
+          children: [
+            {
+              path: '/hosts-detail',
+              name: 'hosts-detail',
+              component: () => import('@/pages/Hosts/HostsDetail')
+            },
+          ]
+        },
       ]
     }
   ]

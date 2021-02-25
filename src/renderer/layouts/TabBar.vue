@@ -10,9 +10,9 @@
             <div class="item-title">Dashboard</div>
             <div class="item-to"><i class="el-icon-arrow-right"></i></div>
           </div>
-          <div class="menu-item" @click="navToPage('edit-hosts')">
+          <div class="menu-item" @click="navToPage('hosts')">
             <div class="item-icon"></div>
-            <div class="item-title">编辑hosts</div>
+            <div class="item-title">切换hosts</div>
             <div class="item-to"><i class="el-icon-arrow-right"></i></div>
           </div>
           <div class="menu-item" @click="navToPage('obs')">
@@ -54,7 +54,7 @@ export default {
 <style scoped lang="scss">
 .main {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 40px);
   border-radius: 16px;
   display: flex;
   flex-direction: row;

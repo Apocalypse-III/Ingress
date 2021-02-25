@@ -1,7 +1,7 @@
 <template>
   <el-container class="main">
-    <el-header class="status-bar">
-      <i class="el-icon-rank drag"></i>
+    <el-header class="status-bar" height="40px">
+<!--      <i class="el-icon-rank "></i>-->
       <div class="button-group">
 <!--        <div class="button fullScreen" title="全屏" @click="fullScreen"><i class="el-icon-full-screen icon"></i></div>-->
         <div class="button min" title="最小化" @click="min"><i class="el-icon-minus icon"></i></div>
@@ -80,15 +80,9 @@ export default {
     height: 32px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-    .drag {
-      margin-left: 32px;
-      font-size: 16px;
-      color: #42b983;
-      -webkit-app-region: drag;
-      cursor: pointer;
-    }
+    -webkit-app-region: drag;
     .button-group {
       height: 100%;
       margin-right: 32px;

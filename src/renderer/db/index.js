@@ -11,10 +11,10 @@ function makeDb(dbName) {
     })
 }
 
-const test = makeDb('test')
 const settings = makeDb('settings')
+const hosts = makeDb('hosts')
 
 export {
-    test,
     settings,
+    hosts,
 }

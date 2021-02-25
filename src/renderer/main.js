@@ -19,7 +19,13 @@ Vue.use(ElementUI);
 const dir = os.tmpdir() + '\\ingress'
 if (! fs.existsSync(dir)) fs.mkdirSync(dir)
 
-Vue.prototype.$ingress = {}
+const ingress = {}
+
+// lodash
+import lodash from 'lodash'
+ingress._ = lodash
+
+Vue.prototype.$ingress = ingress
 
 // Request
 Vue.http = Vue.prototype.$http = axios

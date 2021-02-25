@@ -5,6 +5,7 @@
       <div class="title">编辑 Hosts</div>
     </div>
     <div class="main">
+      <vue-codeditor v-model="content" mode="text" theme="monokai" />
       <el-form :inline="true" :model="host" v-for="(host, index) in hosts" :key="index" class="form">
         <el-form-item label="IP：">
           <el-input v-model="host.ip" placeholder="ip" size="small" class="form-input" @input="e => inputChange(e, index, 'ip')"></el-input>
@@ -25,16 +26,21 @@
 <script>
 import fs from 'fs'
 import { mapGetters, mapActions } from 'vuex';
+import vueCodeditor from "vue-codeditor";
 import {deepClone} from "@/utils/function/deepClone";
 
 const HOSTS_PATH = 'C:/Windows/System32/drivers/etc/hosts'
 
 export default {
   name: "EditHosts",
+  components: {
+    vueCodeditor
+  },
   data() {
     return {
       hosts: [],
-      newBtn: true
+      newBtn: true,
+      content: ''
     }
   },
   computed: {
@@ -42,6 +48,7 @@ export default {
   },
   created() {
     this.getHosts()
+    console.log(this.$ingress.db)
   },
   methods: {
     ...mapActions('Hosts', ['saveOriginalHosts', 'hasDeleteHosts']),
