@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 
 /**
  * Set `__static` path to static files in production
@@ -16,6 +16,8 @@ const winURL = process.env.NODE_ENV === 'development'
 function createWindow () {
   /**
    * Initial window options
+   *
+   * transparent 为 true 时，electron 检测不到最大化、全屏状态，isMaximized、isSimpleFullScreen、isFullScreen 恒为 false
    */
   mainWindow = new BrowserWindow({
     height: 563,
@@ -34,6 +36,8 @@ function createWindow () {
   })
 
   mainWindow.loadURL(winURL)
+
+  mainWindow.webContents.closeDevTools()
 
   mainWindow.on('closed', () => {
     mainWindow = null

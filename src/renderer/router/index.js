@@ -27,11 +27,6 @@ export default new Router({
               name: 'hosts',
               component: () => import('@/pages/Hosts/List')
             },
-            {
-              path: '/obs',
-              name: 'obs',
-              component: () => import('@/pages/Obs')
-            },
           ]
         },
         {

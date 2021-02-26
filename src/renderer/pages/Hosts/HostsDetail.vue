@@ -40,7 +40,9 @@ import { codemirror } from 'vue-codemirror';
 
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
-import 'codemirror/mode/lua/lua.js';
+import fs from "fs";
+
+const HOSTS_PATH = 'C:/Windows/System32/drivers/etc/hosts'
 
 export default {
   name: "HostsDetail",
@@ -96,6 +98,19 @@ export default {
       this.saveLoading = true
       if (this.type === 'edit') {
         this.saveForm._id = this.id
+
+        // 当前选中的直接保存
+        if (this.saveForm.status) {
+          try {
+            fs.accessSync(HOSTS_PATH, fs.constants.W_OK);
+          } catch (e) {
+            this.saveLoading = false
+            this.$notify.error('没有写入权限')
+            return false
+          }
+
+          fs.writeFileSync(HOSTS_PATH, this.saveForm.content);
+        }
         this.$ingress.db.hosts.update(this.saveForm)
       } else {
         this.$ingress.db.hosts.create(this.saveForm)

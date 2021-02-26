@@ -6,7 +6,7 @@
 <!--        <div class="button fullScreen" title="全屏" @click="fullScreen"><i class="el-icon-full-screen icon"></i></div>-->
         <div class="button min" title="最小化" @click="min"><i class="el-icon-minus icon"></i></div>
 <!--        <div class="button max"><i class="far fa-window-maximize icon i-white"></i></div>-->
-        <div class="button max" title="最大化" @click="max"><i class="el-icon-copy-document icon"></i></div>
+<!--        <div class="button max" title="最大化" @click="max"><i class="el-icon-copy-document icon"></i></div>-->
         <div class="button close" title="关闭应用" @click="close"><i class="el-icon-close icon"></i></div>
       </div>
     </el-header>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-const { remote } = require('electron');
+const { ipcRenderer, remote } = require('electron');
 import { mapGetters, mapActions } from 'vuex';
 
 const app = remote.app
@@ -51,15 +51,14 @@ export default {
 
     },
     max() {
-      console.log(window.isMaximized())
-      if (this.isMaximized){
-        this.setMaximized(false)
+      if (window.isMaximized() || window.isSimpleFullScreen() || window.isFullScreen()) {
         window.unmaximize()
+        // window.setFullScreen(false)
       } else {
-        this.setMaximized(true)
         window.maximize()
+        // window.setFullScreen(true)
       }
-      this.setFullScreen(false)
+      // this.setFullScreen(false)
     },
     min() {
       window.minimize()
@@ -89,6 +88,7 @@ export default {
       display: flex;
       flex-direction: row;
       align-items: center;
+      -webkit-app-region: no-drag;
       .button {
         margin-left: 16px;
         width: 16px;
