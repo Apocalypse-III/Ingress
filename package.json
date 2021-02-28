@@ -1,6 +1,6 @@
 {
   "name": "ingress",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "tyrantgenesis <genesis489449701@gmail.com>",
   "description": "由 Electron + VUE 开发的 Windows 桌面工具箱 Ingress",
   "license": "BSD-3-Clause",
