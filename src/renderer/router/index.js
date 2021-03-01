@@ -27,6 +27,11 @@ export default new Router({
               name: 'hosts',
               component: () => import('@/pages/Hosts/List')
             },
+            {
+              path: '/tools',
+              name: 'tools',
+              component: () => import('@/pages/Tools')
+            },
           ]
         },
         {
