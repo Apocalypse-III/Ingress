@@ -41,4 +41,8 @@ const app = new Vue({
 import Models from '@/models'
 Vue.use(Models, app)
 
+// Models
+import utils from '@/utils'
+Vue.use(utils, app)
+
 app.$mount('#app')

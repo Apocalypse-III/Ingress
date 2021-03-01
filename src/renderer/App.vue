@@ -6,7 +6,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { initAppStyle } from "@/utils";
 
 export default {
   name: 'ingress',
@@ -24,7 +23,7 @@ export default {
   methods: {
     ...mapActions('AppStyle', ['changeAllStyle']),
     initInterfaceFromSetting() {
-      initAppStyle(this).then(res => {
+      this.$ingress.utils.initAppStyle(this).then(res => {
         if (res instanceof Array && res.length > 0)
           res.forEach(style => this.changeAllStyle(style))
       })
