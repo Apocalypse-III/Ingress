@@ -20,14 +20,13 @@ function createWindow () {
    * transparent 为 true 时，electron 检测不到最大化、全屏状态，isMaximized、isSimpleFullScreen、isFullScreen 恒为 false
    */
   mainWindow = new BrowserWindow({
-    height: 563,
+    height: 675,
+    width: 1200,
+    minHeight: 675,
+    minWidth: 1200,
     useContentSize: true,
-    width: 1000,
     frame: false,
-    transparent: true,
-    hasShadow: false,
-    minHeight: 540,
-    minWidth: 960,
+    maximizable: true,
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,

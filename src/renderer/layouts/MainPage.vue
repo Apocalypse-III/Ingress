@@ -1,13 +1,27 @@
 <template>
   <el-container class="main">
-    <el-header class="status-bar" height="40px">
+    <el-header class="status-bar" height="60px">
+      <div class="bar-left">
+        <div class="title">Ingress</div>
+        <div class="top" @click="top" v-if="isTop" title="取消置顶">
+          <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M927.701333 375.978667l-279.637333-279.637334A37.546667 37.546667 0 0 0 621.397333 85.333333a37.546667 37.546667 0 0 0-26.666666 11.008L411.904 279.296a366.506667 366.506667 0 0 0-41.770667-2.304 374.016 374.016 0 0 0-234.325333 82.048 37.717333 37.717333 0 0 0-3.072 56.064l206.208 206.208-244.48 244.224a17.92 17.92 0 0 0-5.205333 11.093333l-3.84 42.24a18.090667 18.090667 0 0 0 18.048 19.754667c0.554667 0 1.109333 0 1.706666-0.128l42.24-3.84a17.92 17.92 0 0 0 11.093334-5.248l244.437333-244.437333 206.208 206.208a37.546667 37.546667 0 0 0 26.666667 11.008 37.546667 37.546667 0 0 0 29.397333-14.08 374.826667 374.826667 0 0 0 79.658667-276.224l182.826666-182.826667a37.589333 37.589333 0 0 0 0-53.077333z m-240.725333 178.346666l-27.776 27.818667 4.266667 39.04a294.997333 294.997333 0 0 1-34.474667 174.677333L228.309333 394.922667a293.546667 293.546667 0 0 1 174.634667-34.517334l39.04 4.309334 27.818667-27.776 151.722666-151.722667 217.301334 217.301333-151.850667 151.850667z" fill="#ffffff"></path></svg>
+        </div>
+        <div class="not-top" @click="top" v-else title="置顶">
+          <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M927.701333 375.978667l-279.637333-279.637334A37.546667 37.546667 0 0 0 621.397333 85.333333a37.546667 37.546667 0 0 0-26.666666 11.008L411.904 279.296a366.506667 366.506667 0 0 0-41.770667-2.304 374.016 374.016 0 0 0-234.325333 82.048 37.717333 37.717333 0 0 0-3.072 56.064l206.208 206.208-244.48 244.224a17.92 17.92 0 0 0-5.205333 11.093333l-3.84 42.24a18.090667 18.090667 0 0 0 18.048 19.754667c0.554667 0 1.109333 0 1.706666-0.128l42.24-3.84a17.92 17.92 0 0 0 11.093334-5.248l244.437333-244.437333 206.208 206.208a37.546667 37.546667 0 0 0 26.666667 11.008 37.546667 37.546667 0 0 0 29.397333-14.08 374.826667 374.826667 0 0 0 79.658667-276.224l182.826666-182.826667a37.589333 37.589333 0 0 0 0-53.077333z m-240.725333 178.346666l-27.776 27.818667 4.266667 39.04a294.997333 294.997333 0 0 1-34.474667 174.677333L228.309333 394.922667a293.546667 293.546667 0 0 1 174.634667-34.517334l39.04 4.309334 27.818667-27.776 151.722666-151.722667 217.301334 217.301333-151.850667 151.850667z"></path></svg>
+        </div>
+      </div>
 <!--      <i class="el-icon-rank "></i>-->
       <div class="button-group">
 <!--        <div class="button fullScreen" title="全屏" @click="fullScreen"><i class="el-icon-full-screen icon"></i></div>-->
-        <div class="button min" title="最小化" @click="min"><i class="el-icon-minus icon"></i></div>
-<!--        <div class="button max"><i class="far fa-window-maximize icon i-white"></i></div>-->
-<!--        <div class="button max" title="最大化" @click="max"><i class="el-icon-copy-document icon"></i></div>-->
-        <div class="button close" title="关闭应用" @click="close"><i class="el-icon-close icon"></i></div>
+        <div class="button" title="最小化" @click="min">
+          <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M863.7 552.5H160.3c-10.6 0-19.2-8.6-19.2-19.2v-41.7c0-10.6 8.6-19.2 19.2-19.2h703.3c10.6 0 19.2 8.6 19.2 19.2v41.7c0 10.6-8.5 19.2-19.1 19.2z"></path></svg>
+        </div>
+        <div class="button" title="最大化" @click="max">
+          <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M770.9 923.3H253.1c-83.8 0-151.9-68.2-151.9-151.9V253.6c0-83.8 68.2-151.9 151.9-151.9h517.8c83.8 0 151.9 68.2 151.9 151.9v517.8c0 83.8-68.1 151.9-151.9 151.9zM253.1 181.7c-39.7 0-71.9 32.3-71.9 71.9v517.8c0 39.7 32.3 71.9 71.9 71.9h517.8c39.7 0 71.9-32.3 71.9-71.9V253.6c0-39.7-32.3-71.9-71.9-71.9H253.1z"></path></svg>
+        </div>
+        <div class="button" title="关闭应用" @click="close">
+          <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M897.6 183.5L183 898.1c-7.5 7.5-19.6 7.5-27.1 0l-29.5-29.5c-7.5-7.5-7.5-19.6 0-27.1L841 126.9c7.5-7.5 19.6-7.5 27.1 0l29.5 29.5c7.5 7.4 7.5 19.6 0 27.1z"></path><path d="M183 126.9l714.7 714.7c7.5 7.5 7.5 19.6 0 27.1l-29.5 29.5c-7.5 7.5-19.6 7.5-27.1 0L126.4 183.5c-7.5-7.5-7.5-19.6 0-27.1l29.5-29.5c7.4-7.5 19.6-7.5 27.1 0z"></path></svg>
+        </div>
       </div>
     </el-header>
     <router-view></router-view>
@@ -15,50 +29,39 @@
 </template>
 
 <script>
-const { ipcRenderer, remote } = require('electron');
+const { remote } = require('electron');
 import { mapGetters, mapActions } from 'vuex';
 
-const app = remote.app
 const window = remote.getCurrentWindow()
+const app = remote.app
 
 export default {
   name: "MainPage",
   data() {
     return {
-
+      isTop: window.isAlwaysOnTop(),
     }
   },
   computed: {
-    ...mapGetters('Window', ['isMaximized', 'isFullScreen'])
+    // ...mapGetters('Window', ['isTop'])
   },
   mounted() {
 
   },
   methods: {
-    ...mapActions('Window', ['setMaximized', 'setFullScreen']),
+    ...mapActions('Window', ['setTop']),
+    top() {
+      this.setTop()
+      this.isTop = window.isAlwaysOnTop()
+    },
     close() {
       window.close()
     },
-    fullScreen() {
-      if (this.isFullScreen){
-        this.setFullScreen(false)
-        window.setFullScreen(false)
-      } else {
-        this.setFullScreen(true)
-        window.setFullScreen(true)
-      }
-      this.setMaximized(false)
-
-    },
     max() {
-      if (window.isMaximized() || window.isSimpleFullScreen() || window.isFullScreen()) {
+      if (window.isMaximized())
         window.unmaximize()
-        // window.setFullScreen(false)
-      } else {
+      else
         window.maximize()
-        // window.setFullScreen(true)
-      }
-      // this.setFullScreen(false)
     },
     min() {
       window.minimize()
@@ -76,34 +79,70 @@ export default {
   flex-direction: column;
   .status-bar {
     width: 100%;
-    height: 32px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     -webkit-app-region: drag;
+    .bar-left {
+      margin-left: 12px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .title {
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #42b983;
+        font-size: 28px;
+        font-weight: 600;
+        font-family: 'AlexBrush', serif;
+      }
+      .top {
+        margin-left: 32px;
+        width: 24px;
+        height: 24px;
+        -webkit-app-region: no-drag;
+        background-color: #42b983;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #fff;
+        .icon {
+          margin: 3px;
+          width: 18px;
+          height: 18px;
+        }
+      }
+      .not-top {
+        margin-left: 32px;
+        width: 24px;
+        height: 24px;
+        -webkit-app-region: no-drag;
+        cursor: pointer;
+        .icon {
+          margin: 3px;
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
     .button-group {
       height: 100%;
-      margin-right: 32px;
+      margin-right: 12px;
       display: flex;
       flex-direction: row;
       align-items: center;
       -webkit-app-region: no-drag;
       .button {
-        margin-left: 16px;
+        margin-left: 32px;
         width: 16px;
         height: 16px;
-        border-radius: 8px;
         cursor: pointer;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        //align-items: center;
         .icon {
-          line-height: 16px;
-          font-size: 10px;
-          font-weight: 600;
-          color: #fff;
+          width: 16px;
+          height: 16px;
         }
       }
       .fullScreen {

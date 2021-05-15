@@ -5,13 +5,7 @@
       <div class="title">Dashboard</div>
     </div>
     <div class="main">
-      <!--<el-card class="item"></el-card>
-      <el-card class="item"></el-card>
-      <el-card class="item"></el-card>
-      <el-card class="item"></el-card>
-      <el-card class="item"></el-card>
-      <el-card class="item"></el-card>
-      <el-card class="item"></el-card>-->
+
     </div>
   </el-main>
 </template>

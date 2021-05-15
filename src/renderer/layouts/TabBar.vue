@@ -3,7 +3,7 @@
     <el-aside width="264px" class="tab-bar-container">
       <div class="tab-bar" v-bind:style="tabBarStyle">
         <div class="title">Ingress</div>
-        <div class="user-info"></div>
+<!--        <div class="user-info"></div>-->
         <div class="menu">
           <div class="menu-item" @click="navToPage('home')">
             <div class="item-icon"></div>
@@ -75,7 +75,7 @@ export default {
         color: #fff;
         font-size: 28px;
         font-weight: 600;
-        font-family: 'AlexBrush', Serif;
+        font-family: 'AlexBrush', serif;
       }
       .user-info {
         width: 100%;

@@ -1,11 +1,10 @@
 const state = {
     app: {
         backgroundColor: '#fff',
-        borderRadius: '16px'
     },
     tabBar: {
         backgroundColor: '#42b983',
-        boxShadow: '#42b983 0 0 12px',
+        boxShadow: '#42b983 0 0 8px',
     },
 }
 

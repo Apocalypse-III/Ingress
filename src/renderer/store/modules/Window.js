@@ -1,33 +1,29 @@
+const { remote } = require('electron');
+const window = remote.getCurrentWindow()
+
 const state = {
-    isMaximized: false,
-    isFullScreen: false,
+    isTop: window.isAlwaysOnTop()
 }
 
 const mutations = {
-    SET_MAXIMIZED (state, payload) {
-        state.isMaximized = payload
+    SET_TOP () {
+        window.setAlwaysOnTop(true)
     },
-    SET_FULLSCREEN (state, payload) {
-        state.isFullScreen = payload
+    SET_NOT_TOP () {
+        window.setAlwaysOnTop(false)
     },
 }
 
 const getters = {
-    isMaximized: state => {
-        return state.isMaximized
+    isTop: state => {
+        return state.isTop
     },
-    isFullScreen: state => {
-        return state.isFullScreen
-    }
 }
 
 const actions = {
-    setMaximized ({ commit }, payload) {
-        commit('SET_MAXIMIZED', payload)
+    setTop ({ commit }) {
+        commit(window.isAlwaysOnTop() ? 'SET_NOT_TOP' : 'SET_TOP')
     },
-    setFullScreen ({ commit }, payload) {
-        commit('SET_FULLSCREEN', payload)
-    }
 }
 
 export default {
