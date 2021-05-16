@@ -1,19 +1,10 @@
 <template>
   <el-container class="main">
-    <el-aside width="264px" class="tab-bar-container">
+    <el-aside width="150px" class="tab-bar-container">
       <div class="tab-bar" v-bind:style="tabBarStyle">
-        <div class="title">Ingress</div>
-<!--        <div class="user-info"></div>-->
         <div class="menu">
-          <div class="menu-item" @click="navToPage('home')">
-            <div class="item-icon"></div>
-            <div class="item-title">Dashboard</div>
-            <div class="item-to"><i class="el-icon-arrow-right"></i></div>
-          </div>
-          <div class="menu-item" @click="navToPage('hosts')">
-            <div class="item-icon"></div>
-            <div class="item-title">切换hosts</div>
-            <div class="item-to"><i class="el-icon-arrow-right"></i></div>
+          <div class="menu-item" v-for="item in icons" :key="item.key" @click="navToPage(item.key)" :title="item.title">
+            <el-image class="menu--image" :src="item.icon" fit="fill"></el-image>
           </div>
         </div>
       </div>
@@ -29,7 +20,14 @@ export default {
   name: "TabBar",
   data() {
     return {
-
+      icons: [
+        {key: 'home', title: '首页', icon: require('../assets/icons/home.png')},
+        {key: 'hosts', title: '切换 Hosts', icon: require('../assets/icons/switch.png')},
+        {key: 'note', title: '笔记', icon: require('../assets/icons/edit.png')},
+        {key: 'todo', title: 'TODO', icon: require('../assets/icons/todo.png')},
+        {key: 'video', title: '视界', icon: require('../assets/icons/video.png')},
+        {key: 'video2', title: '视界', icon: require('../assets/icons/video.png')},
+      ],
     }
   },
   computed: {
@@ -54,39 +52,23 @@ export default {
   display: flex;
   flex-direction: row;
   .tab-bar-container {
-    //width: 264px;
     height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 8px 0 32px 0;
+    padding: 32px 0;
     .tab-bar {
-      width: 200px;
+      width: 100px;
       height: inherit;
       border-radius: 16px;
       padding: 16px;
-      .title {
-        width: 100%;
-        height: 60px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #fff;
-        font-size: 28px;
-        font-weight: 600;
-        font-family: 'AlexBrush', serif;
-      }
-      .user-info {
-        width: 100%;
-        height: 60px;
-        padding: 12px 24px;
-        background-color: deepskyblue;
-      }
       .menu {
-        margin-top: 24px;
+        margin: 18px 0;
+        height: calc(100% - 36px);
         display: flex;
         flex-direction: column;
+        justify-content: space-around;
         padding: 0 12px;
         .menu-item {
           padding: 12px 0;
@@ -96,13 +78,10 @@ export default {
           align-items: center;
           color: #fff;
           cursor: pointer;
-          .item-icon {}
-          .item-title {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
+          .menu--image {
+            width: 44px;
+            height: 44px;
           }
-          .item-to {}
         }
       }
     }

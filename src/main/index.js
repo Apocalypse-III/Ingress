@@ -1,4 +1,5 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
+import fs from "fs"
 
 /**
  * Set `__static` path to static files in production
@@ -7,6 +8,10 @@ import { app, BrowserWindow, ipcMain } from 'electron'
 if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
+
+// 创建数据目录
+const dir = app.getPath('documents') + '/ingress'
+if (! fs.existsSync(dir)) fs.mkdirSync(dir)
 
 let mainWindow
 const winURL = process.env.NODE_ENV === 'development'
@@ -20,10 +25,10 @@ function createWindow () {
    * transparent 为 true 时，electron 检测不到最大化、全屏状态，isMaximized、isSimpleFullScreen、isFullScreen 恒为 false
    */
   mainWindow = new BrowserWindow({
-    height: 675,
-    width: 1200,
-    minHeight: 675,
-    minWidth: 1200,
+    height: 600,
+    width: 900,
+    minHeight: 600,
+    minWidth: 900,
     useContentSize: true,
     frame: false,
     maximizable: true,
@@ -55,6 +60,10 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow()
   }
+})
+
+ipcMain.on('close-app', () => {
+  app.quit()
 })
 
 /**

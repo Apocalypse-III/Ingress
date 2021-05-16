@@ -25,11 +25,23 @@
       </div>
     </el-header>
     <router-view></router-view>
+
+<!--    <el-dialog-->
+<!--      title="是否关闭Ingress"-->
+<!--      :visible.sync="closeDialogVisible"-->
+<!--      width="400px"-->
+<!--      :before-close="closeCloseDialog">-->
+<!--      <span slot="footer" class="dialog-footer">-->
+<!--        <el-button size="mini" @click="closeCloseDialog">取 消</el-button>-->
+<!--        <el-button size="mini" type="primary" @click="close">最小化到系统托盘</el-button>-->
+<!--        <el-button size="mini" type="danger" @click="close">确 定</el-button>-->
+<!--      </span>-->
+<!--    </el-dialog>-->
   </el-container>
 </template>
 
 <script>
-const { remote } = require('electron');
+const { remote, ipcRenderer } = require('electron');
 import { mapGetters, mapActions } from 'vuex';
 
 const window = remote.getCurrentWindow()
@@ -39,6 +51,7 @@ export default {
   name: "MainPage",
   data() {
     return {
+      closeDialogVisible: false,
       isTop: window.isAlwaysOnTop(),
     }
   },
@@ -55,7 +68,15 @@ export default {
       this.isTop = window.isAlwaysOnTop()
     },
     close() {
-      window.close()
+      this.$confirm('是否退出应用？', '提示', {
+        confirmButtonText: '退出应用',
+        cancelButtonText: '最小化到系统托盘',
+        type: 'warning'
+      }).then(() => {
+        ipcRenderer.send('close-app')
+      }).catch(() => {
+
+      });
     },
     max() {
       if (window.isMaximized())
@@ -78,6 +99,7 @@ export default {
   display: flex;
   flex-direction: column;
   .status-bar {
+    margin-top: 2px;
     width: 100%;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
     display: flex;
@@ -101,7 +123,7 @@ export default {
         font-family: 'AlexBrush', serif;
       }
       .top {
-        margin-left: 32px;
+        margin-left: 60px;
         width: 24px;
         height: 24px;
         -webkit-app-region: no-drag;
@@ -116,7 +138,7 @@ export default {
         }
       }
       .not-top {
-        margin-left: 32px;
+        margin-left: 60px;
         width: 24px;
         height: 24px;
         -webkit-app-region: no-drag;

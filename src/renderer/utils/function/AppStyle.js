@@ -10,15 +10,9 @@ export default function initAppStyle(vm) {
             type: 'color'
         }).catch(err => reject(err))
         await vm.$ingress.db.settings.createOrFind({
-            key: 'style.app.borderRadius',
-            name: '边框圆角',
-            value: '16px',
-            type: 'pixel'
-        }).catch(err => reject(err))
-        await vm.$ingress.db.settings.createOrFind({
             key: 'style.tabBar.backgroundColor',
             name: '边栏颜色',
-            value: '#42b983',
+            value: 'rgba(66, 185, 131, .84)',
             type: 'color'
         }).catch(err => reject(err))
         await vm.$ingress.db.settings.createOrFind({

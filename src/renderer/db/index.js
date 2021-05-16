@@ -1,8 +1,8 @@
+import { remote } from "electron"
 import Datastore from 'nedb'
 import path from 'path'
-import os from "os";
 
-const dir = os.tmpdir() + '\\ingress'
+const dir = remote.app.getPath('documents') + '/ingress/data'
 
 function makeDb(dbName) {
     return new Datastore({

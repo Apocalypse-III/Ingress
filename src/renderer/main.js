@@ -1,6 +1,4 @@
 import Vue from 'vue'
-import fs from 'fs'
-import os from 'os'
 import axios from 'axios'
 
 import App from '@/App'
@@ -14,10 +12,6 @@ Vue.config.productionTip = false
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
-
-// 创建数据目录
-const dir = os.tmpdir() + '\\ingress'
-if (! fs.existsSync(dir)) fs.mkdirSync(dir)
 
 const ingress = {}
 
