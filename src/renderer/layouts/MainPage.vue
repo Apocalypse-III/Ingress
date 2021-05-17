@@ -10,9 +10,7 @@
           <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M927.701333 375.978667l-279.637333-279.637334A37.546667 37.546667 0 0 0 621.397333 85.333333a37.546667 37.546667 0 0 0-26.666666 11.008L411.904 279.296a366.506667 366.506667 0 0 0-41.770667-2.304 374.016 374.016 0 0 0-234.325333 82.048 37.717333 37.717333 0 0 0-3.072 56.064l206.208 206.208-244.48 244.224a17.92 17.92 0 0 0-5.205333 11.093333l-3.84 42.24a18.090667 18.090667 0 0 0 18.048 19.754667c0.554667 0 1.109333 0 1.706666-0.128l42.24-3.84a17.92 17.92 0 0 0 11.093334-5.248l244.437333-244.437333 206.208 206.208a37.546667 37.546667 0 0 0 26.666667 11.008 37.546667 37.546667 0 0 0 29.397333-14.08 374.826667 374.826667 0 0 0 79.658667-276.224l182.826666-182.826667a37.589333 37.589333 0 0 0 0-53.077333z m-240.725333 178.346666l-27.776 27.818667 4.266667 39.04a294.997333 294.997333 0 0 1-34.474667 174.677333L228.309333 394.922667a293.546667 293.546667 0 0 1 174.634667-34.517334l39.04 4.309334 27.818667-27.776 151.722666-151.722667 217.301334 217.301333-151.850667 151.850667z"></path></svg>
         </div>
       </div>
-<!--      <i class="el-icon-rank "></i>-->
       <div class="button-group">
-<!--        <div class="button fullScreen" title="全屏" @click="fullScreen"><i class="el-icon-full-screen icon"></i></div>-->
         <div class="button" title="全屏" @click="fullScreen">
           <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M909 959H780a30 30 0 0 1 0-60h99a20 20 0 0 0 20-20v-99a30 30 0 0 1 60 0v129a50 50 0 0 1-50 50z m20-685a30 30 0 0 1-30-30v-99a20 20 0 0 0-20-20h-99a30 30 0 0 1 0-60h129a50 50 0 0 1 50 50v129a30 30 0 0 1-30 30z m-157 28v420a50 50 0 0 1-50 50H302a50 50 0 0 1-50-50V302a50 50 0 0 1 50-50h420a50 50 0 0 1 50 50z m-60 30a20 20 0 0 0-20-20H332a20 20 0 0 0-20 20v360a20 20 0 0 0 20 20h360a20 20 0 0 0 20-20V332zM244 125h-99a20 20 0 0 0-20 20v99a30 30 0 0 1-60 0V115a50 50 0 0 1 50-50h129a30 30 0 0 1 0 60zM95 750a30 30 0 0 1 30 30v99a20 20 0 0 0 20 20h99a30 30 0 0 1 0 60H115a50 50 0 0 1-50-50V780a30 30 0 0 1 30-30z"></path></svg>
         </div>
@@ -28,24 +26,12 @@
       </div>
     </el-header>
     <router-view></router-view>
-
-<!--    <el-dialog-->
-<!--      title="是否关闭Ingress"-->
-<!--      :visible.sync="closeDialogVisible"-->
-<!--      width="400px"-->
-<!--      :before-close="closeCloseDialog">-->
-<!--      <span slot="footer" class="dialog-footer">-->
-<!--        <el-button size="mini" @click="closeCloseDialog">取 消</el-button>-->
-<!--        <el-button size="mini" type="primary" @click="close">最小化到系统托盘</el-button>-->
-<!--        <el-button size="mini" type="danger" @click="close">确 定</el-button>-->
-<!--      </span>-->
-<!--    </el-dialog>-->
   </el-container>
 </template>
 
 <script>
 const { remote, ipcRenderer } = require('electron');
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 
 const window = remote.getCurrentWindow()
 const app = remote.app
@@ -57,9 +43,6 @@ export default {
       closeDialogVisible: false,
       isTop: window.isAlwaysOnTop(),
     }
-  },
-  computed: {
-    // ...mapGetters('Window', ['isTop'])
   },
   mounted() {
 
