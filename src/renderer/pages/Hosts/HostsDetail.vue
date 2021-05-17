@@ -3,7 +3,7 @@
     <div class="header">
       <div class="back" @click="back"><i class="el-icon-back" style="margin-right: 8px"></i>返回</div>
       <div class="actions">
-        <div class="save" @click="save"><el-button type="success" size="mini" :disabled="saveForm.content === ''">保存</el-button></div>
+        <div class="save" @click="save"><el-button type="success" size="mini" :disabled="saveForm.content === ''">{{ type === 'edit' ? '保存' : '新增' }}</el-button></div>
         <div class="cancel" @click="back"><el-button type="info" size="mini">取消</el-button></div>
       </div>
     </div>
@@ -36,13 +36,14 @@
 
 <script>
 
-import { codemirror } from 'vue-codemirror';
+import { codemirror } from 'vue-codemirror'
 
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/material.css';
-import fs from "fs";
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/theme/material.css'
+import fs from "fs"
+import process from 'process'
 
-const HOSTS_PATH = 'C:/Windows/System32/drivers/etc/hosts'
+const HOSTS_PATH = process.platform == 'win32' ? 'C:/Windows/System32/drivers/etc/hosts' : '/etc/hosts'
 
 export default {
   name: "HostsDetail",
@@ -111,13 +112,23 @@ export default {
 
           fs.writeFileSync(HOSTS_PATH, this.saveForm.content);
         }
-        this.$ingress.db.hosts.update(this.saveForm)
+        this.$ingress.db.hosts.update(this.saveForm).then(_ => {
+          this.clearForm()
+        })
       } else {
-        this.$ingress.db.hosts.create(this.saveForm)
+        this.$ingress.db.hosts.create(this.saveForm).then(_ => {
+          this.clearForm()
+        })
       }
       this.saveLoading = false
       this.saveFormVisible = false
+
       this.$message.success('保存成功！')
+    },
+    clearForm() {
+      if (this.groupList.indexOf(this.saveForm.group) < 0) this.groupList.push(this.saveForm.group)
+      this.groupFormTypeSwitch = true
+      this.type = 'edit'
     }
   }
 }

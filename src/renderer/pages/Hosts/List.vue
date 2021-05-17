@@ -28,9 +28,14 @@
 </template>
 
 <script>
-import fs from "fs";
+import fs from "fs"
+import process from 'process'
 
-const HOSTS_PATH = 'C:/Windows/System32/drivers/etc/hosts'
+const HOSTS_PATH = process.platform == 'win32' ? 'C:/Windows/System32/drivers/etc/hosts' : '/etc/hosts'
+
+// fs.chmod(HOSTS_PATH, '0777', function(err) {
+//   console.log(err);
+// })
 
 export default {
   name: "List",

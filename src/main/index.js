@@ -32,6 +32,7 @@ function createWindow () {
     useContentSize: true,
     frame: false,
     maximizable: true,
+    // fullScreenable: true,
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
