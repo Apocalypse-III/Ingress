@@ -61,12 +61,14 @@
     }
   },
   "dependencies": {
+    "@kangc/v-md-editor": "^1.7.6",
     "axios": "^0.21.0",
     "dayjs": "^1.10.4",
     "element-ui": "^2.14.1",
     "js-base64": "^3.6.0",
     "lodash": "^4.17.21",
     "nedb": "^1.8.0",
+    "prismjs": "^1.24.0",
     "vue": "^2.6.12",
     "vue-codemirror": "^4.0.6",
     "vue-electron": "^1.0.6",

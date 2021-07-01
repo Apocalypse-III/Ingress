@@ -28,6 +28,11 @@ export default new Router({
               component: () => import('@/pages/Hosts/List')
             },
             {
+              path: '/notes',
+              name: 'notes',
+              component: () => import('@/pages/Notes')
+            },
+            {
               path: '/todo',
               name: 'todo',
               component: () => import('@/pages/Todo')

@@ -23,7 +23,7 @@ export default {
       icons: [
         {key: 'home', title: '首页', icon: require('../assets/icons/home.png')},
         {key: 'hosts', title: '切换 Hosts', icon: require('../assets/icons/switch.png')},
-        {key: 'note', title: '笔记', icon: require('../assets/icons/edit.png')},
+        {key: 'notes', title: '笔记', icon: require('../assets/icons/edit.png')},
         {key: 'todo', title: 'TODO', icon: require('../assets/icons/todo.png')},
         {key: 'record', title: '录制', icon: require('../assets/icons/record.png')},
         {key: 'video2', title: '视界', icon: require('../assets/icons/video.png')},
