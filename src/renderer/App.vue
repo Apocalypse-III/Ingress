@@ -24,8 +24,7 @@ export default {
     ...mapActions('AppStyle', ['changeAllStyle']),
     initInterfaceFromSetting() {
       this.$ingress.utils.initAppStyle(this).then(res => {
-        if (res instanceof Array && res.length > 0)
-          res.forEach(style => this.changeAllStyle(style))
+        if (res instanceof Array && res.length > 0) res.forEach(style => this.changeAllStyle(style))
       })
     },
   }

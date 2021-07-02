@@ -3,7 +3,7 @@ const state = {
         backgroundColor: '#fff',
     },
     tabBar: {
-        backgroundColor: 'rgba(66, 185, 131, .84)',
+        backgroundColor: 'rgba(255, 255, 255, .84)',
         boxShadow: '#42b983 0 0 8px',
     },
 }
