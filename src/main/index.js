@@ -1,5 +1,6 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain, Tray, Menu } from 'electron'
 import fs from "fs"
+import path from "path"
 
 /**
  * Set `__static` path to static files in production
@@ -9,11 +10,9 @@ if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
 
-// 创建数据目录
-const dir = app.getPath('documents') + '/ingress'
-if (! fs.existsSync(dir)) fs.mkdirSync(dir)
-
 let mainWindow
+let appTray
+
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`
@@ -42,11 +41,39 @@ function createWindow () {
 
   mainWindow.loadURL(winURL)
 
-  mainWindow.webContents.closeDevTools()
+  mainWindow.webContents.openDevTools()
 
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+
+
+  //系统托盘右键菜单
+  let trayMenuTemplate = [
+    {
+      label: '打开主界面',
+      click: () => createWindow()
+    },
+    {
+      label: '调试模式',
+      click: () => mainWindow.webContents.openDevTools()
+    },
+    {
+      label: '退出',
+      click: function () {
+        //ipc.send('close-main-window');
+        app.quit();
+      }
+    }
+  ];
+
+  appTray = new Tray(path.join(__dirname, 'icon.ico'));
+
+  const contextMenu = Menu.buildFromTemplate(trayMenuTemplate);
+
+  appTray.setToolTip('Ingress');
+
+  appTray.setContextMenu(contextMenu);
 }
 
 app.on('ready', createWindow)

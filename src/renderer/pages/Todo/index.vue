@@ -1,8 +1,7 @@
 <template>
   <el-main>
     <div class="header">
-      <div class="description">TODO</div>
-      <div class="title">待办事项</div>
+      <div class="back" @click="back"><i class="el-icon-back" style="margin-right: 8px"></i>返回</div>
     </div>
     <div class="main">
         <div class="date-list">
@@ -32,30 +31,34 @@ export default {
           date: new Date()
       }
   },
+  methods: {
+    back() {
+      this.$router.back()
+    },
+  }
 }
 </script>
 
 <style scoped lang="scss">
 .header {
   width: 100%;
+  height: 40px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  .title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #42b983;
-  }
-  .description {
-    font-size: 12px;
-    font-weight: 400;
-    color: #666;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  .back {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
   }
 }
 .main {
     margin: 24px 0 12px 0;
     padding: 0 8px;
-    height: calc(100% - 85px);
+    height: calc(100% - 88px);
     overflow-y: auto;
     border-radius: 4px;
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);

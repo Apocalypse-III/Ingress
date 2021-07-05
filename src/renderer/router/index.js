@@ -15,6 +15,60 @@ export default new Router({
       children: [
         {
           path: '/',
+          name: 'home',
+          meta: {
+            title: 'Ingress',
+            depth: 0
+          },
+          component: () => import('@/pages/Home')
+        },
+        {
+          path: '/',
+          name: 'setting',
+          meta: {
+            title: '设置',
+            depth: 99
+          },
+          component: () => import('@/pages/Setting')
+        },
+        {
+          path: '/hosts',
+          name: 'hosts',
+          meta: {
+            title: '切换Hosts',
+            depth: 1
+          },
+          component: () => import('@/pages/Hosts/List')
+        },
+        {
+          path: '/notes',
+          name: 'notes',
+          meta: {
+            title: '笔记',
+            depth: 1
+          },
+          component: () => import('@/pages/Notes')
+        },
+        {
+          path: '/todo',
+          name: 'todo',
+          meta: {
+            title: 'TODO',
+            depth: 1
+          },
+          component: () => import('@/pages/Todo')
+        },
+        {
+          path: '/record',
+          name: 'record',
+          meta: {
+            title: '录制',
+            depth: 1
+          },
+          component: () => import('@/pages/Record')
+        },
+        /*{
+          path: '/',
           component: () => import('@/layouts/TabBar'),
           children: [
             {
@@ -43,7 +97,7 @@ export default new Router({
               component: () => import('@/pages/Record')
             },
           ]
-        },
+        },*/
         {
           path: '/',
           component: () => import('@/layouts/DetailPage'),
@@ -51,6 +105,10 @@ export default new Router({
             {
               path: '/hosts-detail',
               name: 'hosts-detail',
+              meta: {
+                title: '编辑Hosts',
+                depth: 3
+              },
               component: () => import('@/pages/Hosts/HostsDetail')
             },
           ]

@@ -1,10 +1,9 @@
 <template>
   <el-main>
     <div class="header">
-      <div class="description">hosts 列表</div>
-      <div class="title">切换 hosts</div>
+      <div class="back" @click="back"><i class="el-icon-back" style="margin-right: 8px"></i>返回</div>
     </div>
-    <div class="main">
+    <div class="host-main">
       <el-collapse v-model="activeGroup">
         <el-collapse-item :title="item.group" :name="index" v-for="(item, index) in list" :key="index">
           <div class="switch-container" v-for="hosts in item.list" :key="hosts._id">
@@ -52,6 +51,9 @@ export default {
     this.getHostsGroup()
   },
   methods: {
+    back() {
+      this.$router.back()
+    },
     getHostsGroup() {
       let activeGroupIndex = 0
       let hosts_list = []
@@ -175,46 +177,24 @@ export default {
 <style scoped lang="scss">
 .header {
   width: 100%;
+  height: 40px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  .title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #42b983;
-  }
-  .description {
-    font-size: 12px;
-    font-weight: 400;
-    color: #666;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  .back {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
   }
 }
-.main {
+.host-main {
   margin: 24px 0 12px 0;
   padding: 0 8px;
-  height: calc(100% - 128px);
+  height: calc(100% - 120px);
   overflow-y: auto;
-
-  &::-webkit-scrollbar {
-    width: 8px;
-    border-radius: 4px;
-    background-color: #e1e1e1;
-  }
-
-  &::-webkit-scrollbar-track {
-    border-radius: 4px;
-    background-color: #e1e1e1;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background: deepskyblue;
-  }
-
-  &::-webkit-scrollbar-button {
-    display: none;
-  }
-
   .switch-container {
     display: flex;
     height: 36px;

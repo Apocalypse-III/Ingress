@@ -43,7 +43,7 @@ import 'codemirror/theme/material.css'
 import fs from "fs"
 import process from 'process'
 
-const HOSTS_PATH = process.platform == 'win32' ? 'C:/Windows/System32/drivers/etc/hosts' : '/etc/hosts'
+const HOSTS_PATH = process.platform === 'win32' ? 'C:/Windows/System32/drivers/etc/hosts' : '/etc/hosts'
 
 export default {
   name: "HostsDetail",
@@ -76,6 +76,10 @@ export default {
   },
   mounted() {
     const { type, group } = this.$route.params
+    if (! type || ! group) {
+      this.$router.back()
+      return false
+    }
     this.type = type
     this.groupList = JSON.parse(group)
     if (type === 'edit') {

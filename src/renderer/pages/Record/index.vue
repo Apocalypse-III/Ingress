@@ -1,8 +1,7 @@
 <template>
   <el-main>
     <div class="header">
-      <div class="description">屏幕录制</div>
-      <div class="title">屏幕录制</div>
+      <div class="back" @click="back"><i class="el-icon-back" style="margin-right: 8px"></i>返回</div>
     </div>
     <div class="container">
       <div class="status-group">
@@ -52,6 +51,9 @@ export default {
     video.srcObject = this.stream;
   },
   methods: {
+    back() {
+      this.$router.back()
+    },
     async start() {
       if (this.mediaRecorder) return;
 
@@ -91,24 +93,23 @@ export default {
 <style scoped lang="scss">
 .header {
   width: 100%;
+  height: 40px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  .title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #42b983;
-  }
-  .description {
-    font-size: 12px;
-    font-weight: 400;
-    color: #666;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  .back {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
   }
 }
 .container {
   margin: 24px 0 12px 0;
   padding: 0 8px;
-  height: calc(100% - 100px);
+  height: calc(100% - 88px);
   overflow-y: auto;
   .status-group {
     display: flex;

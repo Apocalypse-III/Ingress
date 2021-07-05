@@ -1,8 +1,7 @@
 <template>
   <el-main>
     <div class="header">
-      <div class="description">备忘录</div>
-      <div class="title">笔记</div>
+      <div class="back" @click="back"><i class="el-icon-back" style="margin-right: 8px"></i>返回</div>
     </div>
   </el-main>
 </template>
@@ -15,24 +14,28 @@ export default {
 
     }
   },
+  methods: {
+    back() {
+      this.$router.back()
+    },
+  }
 }
 </script>
 
 <style scoped lang="scss">
 .header {
   width: 100%;
+  height: 40px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  .title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #42b983;
-  }
-  .description {
-    font-size: 12px;
-    font-weight: 400;
-    color: #666;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  .back {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
   }
 }
 </style>

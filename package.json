@@ -2,7 +2,7 @@
   "name": "ingress",
   "version": "0.1.2",
   "author": "tyrantgenesis <genesis489449701@gmail.com>",
-  "description": "由 Electron + VUE 开发的 Windows 桌面工具箱 Ingress",
+  "description": "基于 Electron 开发的 Windows 桌面工具箱 Ingress",
   "license": "BSD-3-Clause",
   "main": "./dist/electron/main.js",
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "build": {
     "productName": "Ingress工具箱",
-    "appId": "com.apocalypse.electron.ingress",
+    "appId": "com.Apocalypse.TyrantGenesis.Electron.Ingress",
     "directories": {
       "output": "build"
     },
@@ -48,10 +48,28 @@
     "linux": {
       "icon": "build/icons"
     },
-    "extraResources": {
-      "from": "./plugins/",
-      "to": "../plugins"
-    },
+    "extraResources": [
+      {
+        "from": "./Resources/backup/",
+        "to": "./backup"
+      },
+      {
+        "from": "./Resources/data/",
+        "to": "./data"
+      },
+      {
+        "from": "./Resources/Documents/",
+        "to": "./Documents"
+      },
+      {
+        "from": "./Resources/Downloads/",
+        "to": "./Downloads"
+      },
+      {
+        "from": "./Resources/plugins/",
+        "to": "./plugins"
+      }
+    ],
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
@@ -64,9 +82,10 @@
     "@kangc/v-md-editor": "^1.7.6",
     "axios": "^0.21.0",
     "dayjs": "^1.10.4",
-    "element-ui": "^2.14.1",
+    "element-ui": "^2.15.3",
     "js-base64": "^3.6.0",
     "lodash": "^4.17.21",
+    "menubar": "^9.0.5",
     "nedb": "^1.8.0",
     "prismjs": "^1.24.0",
     "vue": "^2.6.12",
@@ -92,10 +111,10 @@
     "css-loader": "^0.28.11",
     "del": "^3.0.0",
     "devtron": "^1.4.0",
-    "electron": "^9.4.0",
+    "electron": "^11.4.9",
     "electron-builder": "^22.9.1",
     "electron-debug": "^1.5.0",
-    "electron-devtools-installer": "^2.2.4",
+    "electron-devtools-installer": "^3.2.0",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "0.4.0",

@@ -31,7 +31,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 @import "./assets/fonts/Nunito/Nunito.css";
 
 @font-face {
@@ -47,6 +47,9 @@ export default {
 
 html, body {
   height: 100%;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 body {
@@ -58,5 +61,22 @@ body {
 #app {
   height: 100%;
   overflow: hidden;
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    //border-radius: 4px;
+    background-color: #e1e1e1;
+  }
+  ::-webkit-scrollbar-track {
+    //border-radius: 4px;
+    background-color: #e1e1e1;
+  }
+  ::-webkit-scrollbar-thumb {
+    //border-radius: 4px;
+    background: deepskyblue;
+  }
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
 }
 </style>

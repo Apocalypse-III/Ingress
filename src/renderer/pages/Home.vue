@@ -5,14 +5,39 @@
       <div class="title">Dashboard</div>
     </div>
     <div class="main">
-
+      <div class="card-item" v-for="(item, index) in icons" :key="index" @click="navToPage(item.key)">
+        <el-image class="menu--image" :src="item.icon" fit="fill"></el-image>
+        <div>{{item.title}}</div>
+      </div>
     </div>
   </el-main>
 </template>
 
 <script>
+import { remote } from 'electron'
+
 export default {
-  name: "Home"
+  name: "Home",
+  data() {
+    return {
+      icons: [
+        // {key: 'home', title: '首页', icon: require('@/assets/icons/home.png')},
+        {key: 'hosts', title: '切换 Hosts', icon: require('@/assets/icons/switch.png')},
+        {key: 'notes', title: '笔记', icon: require('@/assets/icons/edit.png')},
+        {key: 'todo', title: 'TODO', icon: require('@/assets/icons/todo.png')},
+        {key: 'record', title: '录制', icon: require('@/assets/icons/record.png')},
+        {key: 'video2', title: '视界', icon: require('@/assets/icons/video.png')},
+      ],
+    }
+  },
+  mounted() {
+
+  },
+  methods: {
+    navToPage(name) {
+      if (name !== this.$route.name) this.$router.push({name: name})
+    },
+  },
 }
 </script>
 
@@ -43,26 +68,15 @@ export default {
   align-content: flex-start;
   flex-wrap: wrap;
   overflow-y: auto;
-  &::-webkit-scrollbar {
-    width: 8px;
-    border-radius: 4px;
-    background-color: #e1e1e1;
-  }
-  &::-webkit-scrollbar-track {
-    border-radius: 4px;
-    background-color: #e1e1e1;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background: deepskyblue;
-  }
-  &::-webkit-scrollbar-button {
-    display: none;
-  }
-  .item {
-    height: 300px;
-    width: 33.33%;
-    background-color: #42b983;
+  .card-item {
+    width: 16.6666%;
+    padding: 24px 0;
+    text-align: center;
+    cursor: pointer;
+    .menu--image {
+      width: 44px;
+      height: 44px;
+    }
   }
 }
 </style>
