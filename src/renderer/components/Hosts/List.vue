@@ -1,8 +1,5 @@
 <template>
-  <el-main>
-    <div class="header">
-      <div class="back" @click="back"><i class="el-icon-back" style="margin-right: 8px"></i>返回</div>
-    </div>
+  <div class="host-container">
     <div class="host-main">
       <el-collapse v-model="activeGroup">
         <el-collapse-item :title="item.group" :name="index" v-for="(item, index) in list" :key="index">
@@ -23,7 +20,7 @@
       </el-collapse>
     </div>
     <el-button size="small" class="new" @click="addHosts">新增</el-button>
-  </el-main>
+  </div>
 </template>
 
 <script>
@@ -175,67 +172,56 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.header {
+.host-container {
   width: 100%;
-  height: 40px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  .back {
-    height: 40px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    cursor: pointer;
-  }
-}
-.host-main {
-  margin: 24px 0 12px 0;
-  padding: 0 8px;
-  height: calc(100% - 120px);
-  overflow-y: auto;
-  .switch-container {
-    display: flex;
-    height: 36px;
-    margin-right: 24px;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    .hosts-info {
-      font-size: 16px;
-      font-weight: 600;
-      margin-right: 24px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      .save-hosts-name {
-        margin-left: 10px;
-      }
-    }
-    .pure-hosts-name {
-      cursor: pointer;
-    }
-    .hosts-actions {
+  height: 100%;
+  .host-main {
+    margin: 24px 0 12px 0;
+    padding: 0 8px;
+    height: calc(100% - 120px);
+    overflow-y: auto;
+    .switch-container {
       display: flex;
       height: 36px;
+      margin-right: 24px;
       flex-direction: row;
+      justify-content: space-between;
       align-items: center;
-      .hosts-action-action {
-        margin-right: 16px;
-        font-size: 15px;
+      .hosts-info {
+        font-size: 16px;
+        font-weight: 600;
+        margin-right: 24px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .save-hosts-name {
+          margin-left: 10px;
+        }
+      }
+      .pure-hosts-name {
         cursor: pointer;
       }
-      .hosts-action-edit {
-        color: #409EFF;
-      }
-      .hosts-action-delete {
-        color: #F56C6C;
+      .hosts-actions {
+        display: flex;
+        height: 36px;
+        flex-direction: row;
+        align-items: center;
+        .hosts-action-action {
+          margin-right: 16px;
+          font-size: 15px;
+          cursor: pointer;
+        }
+        .hosts-action-edit {
+          color: #409EFF;
+        }
+        .hosts-action-delete {
+          color: #F56C6C;
+        }
       }
     }
   }
-}
-.new {
-  width: 100%;
+  .new {
+    width: 100%;
+  }
 }
 </style>

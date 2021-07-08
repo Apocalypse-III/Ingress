@@ -31,89 +31,31 @@ export default new Router({
           },
           component: () => import('@/pages/Setting')
         },
+      ]
+    },
+    {
+      path: '/',
+      component: () => import('@/layouts/DetailPage'),
+      children: [
         {
-          path: '/hosts',
-          name: 'hosts',
+          path: '/hosts-detail',
+          name: 'hosts-detail',
           meta: {
-            title: '切换Hosts',
-            depth: 1
+            title: '编辑Hosts',
+            depth: 3
           },
-          component: () => import('@/pages/Hosts/List')
+          component: () => import('@/pages/Hosts/HostsDetail')
         },
         {
-          path: '/notes',
-          name: 'notes',
+          path: '/video-play',
+          name: 'video-play',
           meta: {
-            title: '笔记',
-            depth: 1
+            title: '',
+            depth: 10
           },
-          component: () => import('@/pages/Notes')
-        },
-        {
-          path: '/todo',
-          name: 'todo',
-          meta: {
-            title: 'TODO',
-            depth: 1
-          },
-          component: () => import('@/pages/Todo')
-        },
-        {
-          path: '/record',
-          name: 'record',
-          meta: {
-            title: '录制',
-            depth: 1
-          },
-          component: () => import('@/pages/Record')
-        },
-        /*{
-          path: '/',
-          component: () => import('@/layouts/TabBar'),
-          children: [
-            {
-              path: '/',
-              name: 'home',
-              component: () => import('@/pages/Home')
-            },
-            {
-              path: '/hosts',
-              name: 'hosts',
-              component: () => import('@/pages/Hosts/List')
-            },
-            {
-              path: '/notes',
-              name: 'notes',
-              component: () => import('@/pages/Notes')
-            },
-            {
-              path: '/todo',
-              name: 'todo',
-              component: () => import('@/pages/Todo')
-            },
-            {
-              path: '/record',
-              name: 'record',
-              component: () => import('@/pages/Record')
-            },
-          ]
-        },*/
-        {
-          path: '/',
-          component: () => import('@/layouts/DetailPage'),
-          children: [
-            {
-              path: '/hosts-detail',
-              name: 'hosts-detail',
-              meta: {
-                title: '编辑Hosts',
-                depth: 3
-              },
-              component: () => import('@/pages/Hosts/HostsDetail')
-            },
-          ]
+          component: () => import('@/pages/VideoPlay')
         },
       ]
-    }
+    },
   ]
 })

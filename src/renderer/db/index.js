@@ -16,8 +16,12 @@ function makeDb(dbName) {
 
 const settings = makeDb('settings')
 const hosts = makeDb('hosts')
+const channels = makeDb('channels')
+const collection = makeDb('collection')
 
 export {
     settings,
     hosts,
+    channels,
+    collection,
 }

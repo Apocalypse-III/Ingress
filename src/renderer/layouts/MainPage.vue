@@ -49,7 +49,7 @@ export default {
       pageTitle: this.$route.meta.title,
       closeDialogVisible: false,
       isTop: window.isAlwaysOnTop(),
-      transitionName: 'slide-left',
+      transitionName: 'main-slide-left',
     }
   },
   watch: {
@@ -57,7 +57,7 @@ export default {
       this.pageTitle = to.meta.title
       const toDepth = to.meta.depth
       const fromDepth = from.meta.depth
-      this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+      this.transitionName = toDepth < fromDepth ? 'main-slide-right' : 'main-slide-left'
     }
   },
   mounted() {
@@ -192,10 +192,10 @@ export default {
       }*/
     }
   }
-  .slide-right-enter-active,
-  .slide-right-leave-active,
-  .slide-left-enter-active,
-  .slide-left-leave-active {
+  .main-slide-right-enter-active,
+  .main-slide-right-leave-active,
+  .main-slide-left-enter-active,
+  .main-slide-left-leave-active {
     position: absolute;
     top: 64px;
     height: calc(100% - 64px);
@@ -203,19 +203,19 @@ export default {
     will-change: transform;
     transition: all 0.3s ease-out;
   }
-  .slide-right-enter {
+  .main-slide-right-enter {
     opacity: 0;
     transform: translate(-100%, 0);
   }
-  .slide-right-leave-active {
+  .main-slide-right-leave-active {
     opacity: 0;
     transform: translate(0%, 0);
   }
-  .slide-left-enter {
+  .main-slide-left-enter {
     opacity: 0;
     transform: translate(100%, 0);
   }
-  .slide-left-leave-active {
+  .main-slide-left-leave-active {
     opacity: 0;
     transform: translate(0%, 0);
   }
