@@ -4,6 +4,7 @@ const window = remote.getCurrentWindow()
 const state = {
     isTop: window.isAlwaysOnTop(),
     secondPageTitle: '',
+
 }
 
 const mutations = {

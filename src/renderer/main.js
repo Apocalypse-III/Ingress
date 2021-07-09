@@ -24,6 +24,15 @@ Vue.prototype.$ingress = ingress
 // Request
 Vue.http = Vue.prototype.$http = axios
 
+router.beforeEach((to, from, next) => {
+  if (from.meta.keepAlive) {
+    const $content = document.querySelector('#channel');
+    const scrollTop = $content ? $content.scrollTop : 0;
+    from.meta.scrollTop = scrollTop;
+  }
+  next();
+});
+
 const app = new Vue({
   components: { App },
   router,
