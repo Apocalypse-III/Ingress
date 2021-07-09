@@ -18,42 +18,44 @@ export default new Router({
           name: 'home',
           meta: {
             title: 'Ingress',
+            keepAlive: true,
+            scrollTop: 0,
             depth: 0
           },
           component: () => import('@/pages/Home')
-        },
-        {
-          path: '/',
-          name: 'setting',
-          meta: {
-            title: '设置',
-            depth: 99
-          },
-          component: () => import('@/pages/Setting')
-        },
-      ]
-    },
-    {
-      path: '/',
-      component: () => import('@/layouts/DetailPage'),
-      children: [
-        {
-          path: '/hosts-detail',
-          name: 'hosts-detail',
-          meta: {
-            title: '编辑Hosts',
-            depth: 3
-          },
-          component: () => import('@/pages/Hosts/HostsDetail')
         },
         {
           path: '/video-play',
           name: 'video-play',
           meta: {
             title: '',
-            depth: 10
+            keepAlive: false,
+            scrollTop: 0,
+            depth: 2
           },
           component: () => import('@/pages/VideoPlay')
+        },
+        {
+          path: '/sub-page',
+          name: 'sub-page',
+          meta: {
+            title: '',
+            keepAlive: false,
+            scrollTop: 0,
+            depth: 1
+          },
+          component: () => import('@/pages/SubPage')
+        },
+        {
+          path: '/',
+          name: 'setting',
+          meta: {
+            title: '设置',
+            keepAlive: false,
+            scrollTop: 0,
+            depth: 99
+          },
+          component: () => import('@/pages/Setting')
         },
       ]
     },

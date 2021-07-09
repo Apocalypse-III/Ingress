@@ -47,6 +47,20 @@ function createWindow () {
     mainWindow = null
   })
 
+  const filter = {
+    urls: ['http://*/*', 'http://*/*']
+  }
+  mainWindow.webContents.session.webRequest.onBeforeSendHeaders(filter, (details, callback) => {
+    const url = new URL(details.url)
+    details.requestHeaders.Origin = url.origin
+    if (!details.url.includes('//localhost') && details.requestHeaders.Referer && details.requestHeaders.Referer.includes('//localhost')) {
+      details.requestHeaders.Referer = url.origin
+    }
+    callback({ // https://github.com/electron/electron/issues/23988 回调似乎无法修改headers，暂时先用index.html的meta referer policy替代
+      cancel: false,
+      requestHeaders: details.requestHeaders
+    })
+  })
 
   //系统托盘右键菜单
   let trayMenuTemplate = [

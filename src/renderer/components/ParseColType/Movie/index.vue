@@ -62,7 +62,7 @@ export default {
 .default-movie {
   cursor: pointer;
   .movie-pic {
-    height: 120px;
+    height: 150px;
     border-radius: 8px;
     overflow: hidden;
     .movie-pic-image {
@@ -74,6 +74,11 @@ export default {
     padding: 4px 8px;
     text-align: center;
     color: #767676;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
   }
 }
 </style>

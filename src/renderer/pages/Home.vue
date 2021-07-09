@@ -9,8 +9,8 @@
       >
         <!--          <img :src="imgSrc" alt="" slot="header_tab_img" />-->
       </header-tab>
-      <div class="channel-container">
-        <component :is="currentComponent"></component>
+      <div class="channel-container" id="channel">
+        <component :is="currentComponent" :native-parse-result="nativeParseResult"></component>
       </div>
     </div>
   </el-main>
@@ -19,22 +19,11 @@
 <script>
 import Vue from 'vue'
 import cheerio from "cheerio"
+import { JSDOM } from 'jsdom'
 import { Interpreter } from "eval5"
 import HeaderTab from '@/components/HeaderTab'
 import Host from '@/components/Hosts/List'
 import ParseColType from '@/components/ParseColType'
-
-/*let res = request({
-  url: "https://cn.pornhub.com/video?o=hot&cc=jp&page=1",
-  method: "get",
-  json: true,
-  // headers: {
-  //   "content-type": "application/json",
-  // },
-  // body: JSON.stringify(requestData)
-}, function(error, response, body) {
-  console.log(error)
-})*/
 
 export default {
   name: "Home",
@@ -46,7 +35,15 @@ export default {
   data() {
     return {
       list: [
-        { id: 1, name: "我的主页" },
+        {
+          id: 1,
+          name: "我的主页",
+          rule: {
+            nativeStyle: true,
+            host: 'http://www.979797.wang/index.php/vod/type/id/1.html',
+            base_rule: '',
+          },
+        },
         { id: 2, name: "编辑 hosts" },
         { id: 3, name: "笔记" },
         { id: 4, name: "录制" },
@@ -61,17 +58,14 @@ export default {
         {key: 'record', title: '录制', icon: require('@/assets/icons/record.png')},
         {key: 'video2', title: '视界', icon: require('@/assets/icons/video.png')},
       ],
+      nativeParseResult: []
     }
   },
   async created() {
+
     Vue.component('async-webpack-component', () => import('@/components/ParseColType'))
+    await this.parseNativeRule({})
 
-    let response = await fetch("http://www.zzzfun.com/vod_type_id_42_page_5.html");
-    let list = cheerio('.search-result a', await response.text())
-
-    list.each((index, item) => {
-      // console.log(cheerio(item).parent().html())
-    })
     /*const ctx = {
       $message: this.$message,
       $notify: this.$notify,
@@ -99,6 +93,11 @@ export default {
       console.log(e);
     }*/
   },
+  activated() {
+    const scrollTop = this.$route.meta.scrollTop;
+    const $content = document.querySelector('#channel');
+    if (scrollTop && $content) $content.scrollTop = scrollTop;
+  },
   methods: {
     changeTab(index, e) {
       this.current = index
@@ -122,7 +121,37 @@ export default {
         }
         tab.scrollLeft = liTarget;
       }
-    }
+    },
+    async parseNativeRule(rule) {
+      let response = await fetch("http://www.979797.wang/index.php/vod/type/id/1.html");
+      const html = await response.text()
+
+      const document = new JSDOM(html).window.document
+      const list = document.querySelectorAll(".stui-vodlist li")
+
+      list.forEach(item => {
+        let item_document = new JSDOM(item.outerHTML).window.document;
+        let title = item_document.querySelector("h4").textContent
+        let pic_url = item_document.querySelector(".lazyload").getAttribute('data-original')
+        let desc = item_document.querySelector(".pic-text").textContent
+        let url = item_document.querySelector("a").href
+
+        this.nativeParseResult.push({
+          type: 'movie',
+          width: 4,
+          title,
+          url,
+          pic_url,
+          desc,
+        })
+      })
+      /*const rule_list = rule.base_rule.split(';')
+      try {
+        rule_list[0]
+      } catch (e) {}*/
+
+
+    },
   },
 }
 </script>
@@ -151,7 +180,10 @@ export default {
     height: 45px;
   }
   .channel-container {
+    padding-right: 8px;
     height: calc(100% - 50px);
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 </style>

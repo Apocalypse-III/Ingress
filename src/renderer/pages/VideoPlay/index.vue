@@ -1,70 +1,75 @@
 <template>
   <div class="video-container">
-    <div id="DPlayer" ref="DPlayer"></div>
+    <div id="player" ref="player"></div>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
-import DPlayer from 'dplayer'
-import ffmpeg from 'fluent-ffmpeg'
-const ffmpegPath = require('@ffmpeg-installer/ffmpeg')
-const http = require('http')
+import Player from 'xgplayer'
+import HlsJsPlayer from 'xgplayer-hls.js'
+import FlvJsPlayer from 'xgplayer-flv.js'
 
 export default {
   name: "video-play",
   data() {
     return {
       url: '',
-      dp: null,
+      player: null,
+      config: {
+        id: 'player',
+        // el: this.$refs.player,
+        url: '',
+        lang: 'zh-cn',
+        width: '100%',
+        height: 400,
+        volume: 1,
+        autoplay: true,
+        videoInit: true,
+        screenShot: true,
+        keyShortcut: 'off',
+        crossOrigin: true,
+        cssFullscreen: true,
+        defaultPlaybackRate: 1,
+        playbackRate: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 3, 4, 5],
+        playPrev: true,
+        pip: true,
+        playNextOne: true,
+        videoStop: true,
+        showList: true,
+        showHistory: true,
+        quitMiniMode: true,
+        videoTitle: true,
+        airplay: true,
+        closeVideoTouch: true,
+        ignores: ['replay', 'error'], // 为了切换播放器类型时避免显示错误刷新，暂时忽略错误
+        preloadTime: 300,
+      },
     }
   },
   created() {
     const {url, title} = this.$route.params
 
     this.setSecondPageTitle(title)
-    this._ffmpegCommand = ffmpeg()
-        .setFfmpegPath(ffmpegPath.path)
-        .input(url)
-        .nativeFramerate()
-        .format('mp4')
-        .outputOptions('-movflags', 'frag_keyframe+empty_moov')
-    // read input at native framerate
-    /*.nativeFramerate()
-    .videoCodec(videoCodec)
-    .audioCodec(audioCodec)
-    .format('mp4')
-    .seekInput(startTime)
-    // fragmeted mp4
-    .outputOptions('-movflags', 'frag_keyframe+empty_moov');*/
-    let videoStream = this._ffmpegCommand.pipe();
-    console.log(videoStream.pipe())
-    // this.url = videoStream.url
-    // videoStream.pipe(response);
-    // this.url = "http://127.0.0.1:8888"
+    this.config.url = url
   },
   mounted() {
-    this.initDP()
+    this.initPlayer()
   },
   methods: {
     ...mapActions('Window', ['setSecondPageTitle']),
-    initDP() {
-      this.dp = new DPlayer({
-        container: this.$refs.DPlayer,
-        screenshot: true,
-        video: {
-          url: this.url,
-          /*pic: 'demo.jpg',
-          thumbnails: 'thumbnails.jpg',*/
-        },
-        /*subtitle: {
-          url: 'webvtt.vtt',
-        },
-        danmaku: {
-          id: 'demo',
-          api: 'https://api.prprpr.me/dplayer/',
-        },*/
-      })
+    initPlayer() {
+      const ext = this.config.url.match(/\.\w+?$/)[0].slice(1)
+      switch (ext) {
+        case 'mp4':
+          this.player = new Player(this.config)
+          break
+        case 'flv':
+          this.player = new FlvJsPlayer(this.config)
+          break
+        default:
+          this.player = new HlsJsPlayer(this.config)
+      }
     },
   },
 }
